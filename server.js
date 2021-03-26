@@ -1,6 +1,7 @@
 const { ApolloServer, gql, MockList } = require("apollo-server");
 // const { string, email } = require("casual");
 const faker = require("faker")
+const port = 3000
 
 const typeDefs = gql`
   type Query {
@@ -83,6 +84,6 @@ const server = new ApolloServer({
   mocks,
 });
 
-server.listen().then(({ url }) => {
-  console.log(`🚀 Server ready at ${url}`);
+server.listen(process.env.PORT || port, () => {
+  console.log(`Example app listening at http://localhost:${port}`);
 });
