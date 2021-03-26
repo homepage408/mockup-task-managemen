@@ -82,7 +82,14 @@ const mocks = {
 const server = new ApolloServer({
   typeDefs,
   mocks,
+  playground: {
+    settings: {
+      "editor.theme": "light",
+    },
+  },
+  introspection: true,
 });
+
 
 server.listen(process.env.PORT || port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
