@@ -62,7 +62,7 @@ const mocks = {
   User:()=>({
     email:()=> faker.internet.email(),
     password:()=> faker.internet.password(),
-    role:()=> faker.random.arrayElement(["supervisor","planner","worker"]),
+    role:()=> faker.random.arrayElement(["admin","supervisor","planner","worker"]),
     spv_id:()=> faker.random.number({min:5,max:15})
   }),
   Tasks:()=>({
