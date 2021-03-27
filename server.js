@@ -9,10 +9,10 @@ const typeDefs = gql`
     findTaskSPV: [Tasks]
     listTaskWorker(assignee: Int): [Tasks]
 
-    findAllTask: [Task]
-    findAllTaskPlanner: [Task]
-    findTaskReturn: [Task]
-    findTaskReject: [Task]
+    findAllTask: [Tasks]
+    findAllTaskPlanner: [Tasks]
+    findTaskReturn: [Tasks]
+    findTaskReject: [Tasks]
   }
 
   type Tasks {
