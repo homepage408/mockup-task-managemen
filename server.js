@@ -63,19 +63,10 @@ const typeDefs = gql`
     updatePassword(id: Int, password: String): User
 
     updateTaskWorker(id: Int, status: String): Tasks
-    createTask(
-      project_id: Int
-      assignee: Int
-      title: String
-      description: String
-      start_date: String
-      due_date: String
-    ): Tasks
 
     createNote(id: Int, note: String): Note
 
     createTask(
-      id: Int
       project_id: Int
       assignee: Int
       title: String
