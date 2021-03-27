@@ -5,7 +5,7 @@ const port = 4000
 
 const typeDefs = gql`
   type Query {
-    user: User
+    user: [User]
     findTaskSPV: [Tasks]
     listTaskWorker(assignee:Int): [Tasks]
   }
@@ -74,7 +74,7 @@ const mocks = {
     start_date:()=> faker.date.recent(),
     due_date:()=> faker.date.soon(),
     attachment:()=> faker.internet.url(),
-    status:()=> faker.random.arrayElement(["Draft","Submit","Approved","Return","Reject","Todo","Doing","Done"])
+    status:()=> faker.random.arrayElement(["draft","submit","approved","return","reject","todo","doing","done"])
   }),
   Note:()=>({
     id:()=>faker.random.number({min:1,max:10}),
