@@ -20,6 +20,7 @@ const typeDefs = gql`
     due_date: String
     attachment: String
     status: String
+    is_read: String
     notes: [Note]
   }
 
@@ -72,6 +73,7 @@ const typeDefs = gql`
     ): Tasks
 
     createNote(id: Int, note: String): Note
+
     createTask(
       id: Int
       project_id: Int
@@ -83,7 +85,7 @@ const typeDefs = gql`
       attachment: String
       status: String
       is_read: String
-    ): Task
+    ): Tasks
 
     updateTask(
       id: Int
@@ -96,12 +98,12 @@ const typeDefs = gql`
       attachment: String
       status: String
       is_read: String
-    ): Task
+    ): Tasks
 
-    updateApproval(id: Int, status: String): Task
-    updateIsRead(id: Int, is_read: String): Task
+    updateApproval(id: Int, status: String): Tasks
+    updateIsRead(id: Int, is_read: String): Tasks
 
-    deleteTask(id: Int): Task
+    deleteTask(id: Int): Tasks
   }
 `;
 
