@@ -1,12 +1,13 @@
 const { ApolloServer, gql, MockList } = require("apollo-server");
 // const { string, email } = require("casual");
 const faker = require("faker")
-const port = 3000
+const port = 4000
 
 const typeDefs = gql`
   type Query {
     user: User
     findTaskSPV: [Tasks]
+    listTaskWorker(assignee:Int): [Tasks]
   }
 
   type Tasks{
@@ -43,8 +44,12 @@ const typeDefs = gql`
     createUser(fullname:String,username:String,email:String,password:String,role:String,spv_id:Int): User
     updateUser(id:Int,fullname:String,username:String,email:String,role:String,spv_id:Int): User
     deleteUser(id:Int): Int
-
     updatePassword(id:Int,password:String): User
+
+    updateTaskWorker(id:Int,status:String): Tasks
+    createTask(project_id:Int,assignee:Int,title:String,description:String,start_date:String,due_date:String): Tasks
+
+    
     createNote(id:Int,note:String): Note
   }
 `;
