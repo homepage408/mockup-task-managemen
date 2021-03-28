@@ -92,28 +92,100 @@ const typeDefs = gql`
   }
 
   type UpdateStatusIsRead {
+    id: Int
+    project_id: Int
+    assignee: Int
+    title: String
+    description: String
+    start_date: String
+    due_date: String
+    attachment: String
     status: String
+    is_read: String
   }
   type UpdateStatusDraft {
+    id: Int
+    project_id: Int
+    assignee: Int
+    title: String
+    description: String
+    start_date: String
+    due_date: String
+    attachment: String
     status: String
+    is_read: String
   }
   type UpdateStatusIsAproved {
+    id: Int
+    project_id: Int
+    assignee: Int
+    title: String
+    description: String
+    start_date: String
+    due_date: String
+    attachment: String
     status: String
+    is_read: String
   }
   type UpdateStatusIsReturn {
+    id: Int
+    project_id: Int
+    assignee: Int
+    title: String
+    description: String
+    start_date: String
+    due_date: String
+    attachment: String
     status: String
+    is_read: String
   }
   type UpdateStatusIsReject {
+    id: Int
+    project_id: Int
+    assignee: Int
+    title: String
+    description: String
+    start_date: String
+    due_date: String
+    attachment: String
     status: String
+    is_read: String
   }
   type UpdateStatusIsTodo {
+    id: Int
+    project_id: Int
+    assignee: Int
+    title: String
+    description: String
+    start_date: String
+    due_date: String
+    attachment: String
     status: String
+    is_read: String
   }
   type UpdateStatusIsDoing {
+    id: Int
+    project_id: Int
+    assignee: Int
+    title: String
+    description: String
+    start_date: String
+    due_date: String
+    attachment: String
     status: String
+    is_read: String
   }
   type UpdateStatusIsDone {
+    id: Int
+    project_id: Int
+    assignee: Int
+    title: String
+    description: String
+    start_date: String
+    due_date: String
+    attachment: String
     status: String
+    is_read: String
   }
 
   type Mutation {
