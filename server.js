@@ -29,7 +29,10 @@ const typeDefs = gql`
     attachment: String
     status: String
     is_read: String
-    notes: [Note]
+  }
+
+  type TasksAttachment{
+    attachment: String
   }
 
   type Note {
@@ -173,6 +176,8 @@ const typeDefs = gql`
     deleteTask(id: Int): Tasks
 
     statusToDraft(id: Int, status: String): Tasks
+
+    uploadAttachment(id:Int, attachment:String): TasksAttachment
   }
 `;
 
@@ -242,6 +247,10 @@ const mocks = {
     status: () => faker.random.arrayElement(["Done"]),
   }),
 
+  TasksAttachment:()=>({
+    attachment: () => faker.internet.url(),
+  }),
+
   Tasks: () => ({
     id: () => faker.random.number({ min: 1, max: 10 }),
     project_id: () => faker.random.number({ min: 1, max: 10 }),
@@ -250,7 +259,7 @@ const mocks = {
     description: () => faker.lorem.sentence(),
     start_date: () => faker.date.recent(),
     due_date: () => faker.date.soon(),
-    attachment: () => faker.internet.url(),
+    attachment: () => "",
     status: () =>
       faker.random.arrayElement([
         "draft",
@@ -262,6 +271,7 @@ const mocks = {
         "doing",
         "done",
       ]),
+      is_read:()=> faker.random.arrayElement(["False"]),
   }),
   Note: () => ({
     id: () => faker.random.number({ min: 1, max: 10 }),
