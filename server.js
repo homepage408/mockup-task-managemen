@@ -13,6 +13,7 @@ const typeDefs = gql`
 
     findTaskSPV: [Tasks]
 
+    findAllTaskworker(id: Int): Tasks
     findAllTask: [Tasks]
     findTaskReturn: [Tasks]
     findTaskReject: [Tasks]
