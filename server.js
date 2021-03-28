@@ -6,11 +6,14 @@ const port = 4000;
 const typeDefs = gql`
   type Query {
     user: [User]
+
+    findUser(id: Int): User
+
+    findUserSpv(id: Int): User
+
     findTaskSPV: [Tasks]
-    listTaskWorker(assignee: Int): [Tasks]
 
     findAllTask: [Tasks]
-    findAllTaskPlanner: [Tasks]
     findTaskReturn: [Tasks]
     findTaskReject: [Tasks]
   }
@@ -45,8 +48,78 @@ const typeDefs = gql`
     spv_id: Int
   }
 
+  type LoginAdmin {
+    id: Int
+    fullname: String
+    username: String
+    email: String
+    password: String
+    role: String
+    spv_id: Int
+  }
+
+  type LoginSupervisor {
+    id: Int
+    fullname: String
+    username: String
+    email: String
+    password: String
+    role: String
+    spv_id: Int
+  }
+
+  type LoginPlanner {
+    id: Int
+    fullname: String
+    username: String
+    email: String
+    password: String
+    role: String
+    spv_id: Int
+  }
+
+  type LoginWorker {
+    id: Int
+    fullname: String
+    username: String
+    email: String
+    password: String
+    role: String
+    spv_id: Int
+  }
+
+  type UpdateStatusIsRead {
+    status: String
+  }
+  type UpdateStatusDraft {
+    status: String
+  }
+  type UpdateStatusIsAproved {
+    status: String
+  }
+  type UpdateStatusIsReturn {
+    status: String
+  }
+  type UpdateStatusIsReject {
+    status: String
+  }
+  type UpdateStatusIsTodo {
+    status: String
+  }
+  type UpdateStatusIsDoing {
+    status: String
+  }
+  type UpdateStatusIsDone {
+    status: String
+  }
+
   type Mutation {
-    Login(email: String, password: String): User
+    Login(email:String, password: String): User
+    LoginAdmin(email: String, password: String): LoginAdmin
+    LoginSupervisor(email: String, password: String):LoginSupervisor
+    LoginPlanner(email: String, password: String):LoginPlanner
+    LoginWorker(email: String, password: String):LoginWorker
+
     createUser(
       fullname: String
       username: String
@@ -66,7 +139,6 @@ const typeDefs = gql`
     ): User
     deleteUser(id: Int): Int
     updatePassword(id: Int, password: String): User
-
     updateTaskWorker(id: Int, status: String): Tasks
 
     createNote(id: Int, note: String): Note
@@ -93,13 +165,14 @@ const typeDefs = gql`
       due_date: String
       attachment: String
       status: String
-      is_read: String
     ): Tasks
 
     updateApproval(id: Int, status: String): Tasks
-    updateIsRead(id: Int, is_read: String): Tasks
+    updateIsRead(id: Int): Tasks
 
     deleteTask(id: Int): Tasks
+
+    statusToDraft(id: Int, status: String): Tasks
   }
 `;
 
@@ -115,6 +188,60 @@ const mocks = {
       faker.random.arrayElement(["admin", "supervisor", "planner", "worker"]),
     spv_id: () => faker.random.number({ min: 5, max: 15 }),
   }),
+
+  LoginAdmin: () => ({
+    email: () => faker.internet.email(),
+    password: () => faker.internet.password(),
+    role: () => faker.random.arrayElement(["admin"]),
+    spv_id: () => faker.random.number({ min: 5, max: 15 }),
+  }),
+
+  LoginSupervisor: () => ({
+    email: () => faker.internet.email(),
+    password: () => faker.internet.password(),
+    role: () => faker.random.arrayElement(["supervisor"]),
+    spv_id: () => faker.random.number({ min: 5, max: 15 }),
+  }),
+
+  LoginPlanner: () => ({
+    email: () => faker.internet.email(),
+    password: () => faker.internet.password(),
+    role: () => faker.random.arrayElement(["planner"]),
+    spv_id: () => faker.random.number({ min: 5, max: 15 }),
+  }),
+
+  LoginWorker: () => ({
+    email: () => faker.internet.email(),
+    password: () => faker.internet.password(),
+    role: () => faker.random.arrayElement(["worker"]),
+    spv_id: () => faker.random.number({ min: 5, max: 15 }),
+  }),
+
+  UpdateStatusIsRead: () => ({
+    is_read: () => faker.random.arrayElement(["True"]),
+  }),
+  UpdateStatusDraft: () => ({
+    status: () => faker.random.arrayElement(["Draft"]),
+  }),
+  UpdateStatusIsAproved: () => ({
+    status: () => faker.random.arrayElement(["Approved"]),
+  }),
+  UpdateStatusIsReturn: () => ({
+    status: () => faker.random.arrayElement(["Return"]),
+  }),
+  UpdateStatusReject: () => ({
+    status: () => faker.random.arrayElement(["Reject"]),
+  }),
+  UpdateStatusTodo: () => ({
+    status: () => faker.random.arrayElement(["Todo"]),
+  }),
+  UpdateStatusDoing: () => ({
+    status: () => faker.random.arrayElement(["Doing"]),
+  }),
+  UpdateStatusDone: () => ({
+    status: () => faker.random.arrayElement(["Done"]),
+  }),
+
   Tasks: () => ({
     id: () => faker.random.number({ min: 1, max: 10 }),
     project_id: () => faker.random.number({ min: 1, max: 10 }),
