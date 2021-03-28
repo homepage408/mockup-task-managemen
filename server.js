@@ -31,7 +31,7 @@ const typeDefs = gql`
     is_read: String
   }
 
-  type TasksAttachment{
+  type TasksAttachment {
     attachment: String
   }
 
@@ -117,11 +117,11 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    Login(email:String, password: String): User
+    Login(email: String, password: String): User
     LoginAdmin(email: String, password: String): LoginAdmin
-    LoginSupervisor(email: String, password: String):LoginSupervisor
-    LoginPlanner(email: String, password: String):LoginPlanner
-    LoginWorker(email: String, password: String):LoginWorker
+    LoginSupervisor(email: String, password: String): LoginSupervisor
+    LoginPlanner(email: String, password: String): LoginPlanner
+    LoginWorker(email: String, password: String): LoginWorker
 
     createUser(
       fullname: String
@@ -177,7 +177,7 @@ const typeDefs = gql`
 
     statusToDraft(id: Int, status: String): Tasks
 
-    uploadAttachment(id:Int, attachment:String): TasksAttachment
+    uploadAttachment(id: Int, attachment: String): TasksAttachment
   }
 `;
 
@@ -223,32 +223,123 @@ const mocks = {
   }),
 
   UpdateStatusIsRead: () => ({
+    id: () => faker.random.number({ min: 1, max: 10 }),
+    project_id: () => faker.random.number({ min: 1, max: 10 }),
+    assignee: () => faker.random.number({ min: 1, max: 10 }),
+    title: () => faker.lorem.text(),
+    description: () => faker.lorem.sentence(),
+    start_date: () => faker.date.recent(),
+    due_date: () => faker.date.soon(),
+    attachment: () => "",
+    status: () =>
+      faker.random.arrayElement([
+        "draft",
+        "submit",
+        "approved",
+        "return",
+        "reject",
+        "todo",
+        "doing",
+        "done",
+      ]),
     is_read: () => faker.random.arrayElement(["True"]),
   }),
   UpdateStatusDraft: () => ({
+    id: () => faker.random.number({ min: 1, max: 10 }),
+    project_id: () => faker.random.number({ min: 1, max: 10 }),
+    assignee: () => faker.random.number({ min: 1, max: 10 }),
+    title: () => faker.lorem.text(),
+    description: () => faker.lorem.sentence(),
+    start_date: () => faker.date.recent(),
+    due_date: () => faker.date.soon(),
+    attachment: () => "",
     status: () => faker.random.arrayElement(["Draft"]),
+    is_read: () => faker.random.arrayElement(["False"]),
   }),
   UpdateStatusIsAproved: () => ({
+    id: () => faker.random.number({ min: 1, max: 10 }),
+    project_id: () => faker.random.number({ min: 1, max: 10 }),
+    assignee: () => faker.random.number({ min: 1, max: 10 }),
+    title: () => faker.lorem.text(),
+    description: () => faker.lorem.sentence(),
+    start_date: () => faker.date.recent(),
+    due_date: () => faker.date.soon(),
+    attachment: () => "",
     status: () => faker.random.arrayElement(["Approved"]),
+    is_read: () => faker.random.arrayElement(["False"]),
   }),
   UpdateStatusIsReturn: () => ({
+    id: () => faker.random.number({ min: 1, max: 10 }),
+    project_id: () => faker.random.number({ min: 1, max: 10 }),
+    assignee: () => faker.random.number({ min: 1, max: 10 }),
+    title: () => faker.lorem.text(),
+    description: () => faker.lorem.sentence(),
+    start_date: () => faker.date.recent(),
+    due_date: () => faker.date.soon(),
+    attachment: () => "",
     status: () => faker.random.arrayElement(["Return"]),
+    is_read: () => faker.random.arrayElement(["False"]),
   }),
   UpdateStatusReject: () => ({
+    id: () => faker.random.number({ min: 1, max: 10 }),
+    project_id: () => faker.random.number({ min: 1, max: 10 }),
+    assignee: () => faker.random.number({ min: 1, max: 10 }),
+    title: () => faker.lorem.text(),
+    description: () => faker.lorem.sentence(),
+    start_date: () => faker.date.recent(),
+    due_date: () => faker.date.soon(),
+    attachment: () => "",
     status: () => faker.random.arrayElement(["Reject"]),
+    is_read: () => faker.random.arrayElement(["False"]),
   }),
   UpdateStatusTodo: () => ({
+    id: () => faker.random.number({ min: 1, max: 10 }),
+    project_id: () => faker.random.number({ min: 1, max: 10 }),
+    assignee: () => faker.random.number({ min: 1, max: 10 }),
+    title: () => faker.lorem.text(),
+    description: () => faker.lorem.sentence(),
+    start_date: () => faker.date.recent(),
+    due_date: () => faker.date.soon(),
+    attachment: () => "",
     status: () => faker.random.arrayElement(["Todo"]),
+    is_read: () => faker.random.arrayElement(["False"]),
   }),
   UpdateStatusDoing: () => ({
+    id: () => faker.random.number({ min: 1, max: 10 }),
+    project_id: () => faker.random.number({ min: 1, max: 10 }),
+    assignee: () => faker.random.number({ min: 1, max: 10 }),
+    title: () => faker.lorem.text(),
+    description: () => faker.lorem.sentence(),
+    start_date: () => faker.date.recent(),
+    due_date: () => faker.date.soon(),
+    attachment: () => "",
     status: () => faker.random.arrayElement(["Doing"]),
+    is_read: () => faker.random.arrayElement(["False"]),
   }),
   UpdateStatusDone: () => ({
+    id: () => faker.random.number({ min: 1, max: 10 }),
+    project_id: () => faker.random.number({ min: 1, max: 10 }),
+    assignee: () => faker.random.number({ min: 1, max: 10 }),
+    title: () => faker.lorem.text(),
+    description: () => faker.lorem.sentence(),
+    start_date: () => faker.date.recent(),
+    due_date: () => faker.date.soon(),
+    attachment: () => "",
     status: () => faker.random.arrayElement(["Done"]),
+    is_read: () => faker.random.arrayElement(["False"]),
   }),
 
-  TasksAttachment:()=>({
+  TasksAttachment: () => ({
+    id: () => faker.random.number({ min: 1, max: 10 }),
+    project_id: () => faker.random.number({ min: 1, max: 10 }),
+    assignee: () => faker.random.number({ min: 1, max: 10 }),
+    title: () => faker.lorem.text(),
+    description: () => faker.lorem.sentence(),
+    start_date: () => faker.date.recent(),
+    due_date: () => faker.date.soon(),
     attachment: () => faker.internet.url(),
+    status: () => faker.random.arrayElement(["Done"]),
+    is_read: () => faker.random.arrayElement(["False"]),
   }),
 
   Tasks: () => ({
@@ -271,7 +362,7 @@ const mocks = {
         "doing",
         "done",
       ]),
-      is_read:()=> faker.random.arrayElement(["False"]),
+    is_read: () => faker.random.arrayElement(["False"]),
   }),
   Note: () => ({
     id: () => faker.random.number({ min: 1, max: 10 }),
